@@ -22,6 +22,9 @@ train.drop(['FireplaceQu', 'Street', 'Utilities', 'LandContour', 'MasVnrType',
 	'BsmtFinType1', 'BsmtFinSF1', 'BsmtUnfSF', '1stFlrSF', '2ndFlrSF'], 
 	axis=1, inplace=True)
 
+
+## 
+
 print(train.columns)
 #for column in train.columns:
 #    percentages = train[column].value_counts()/1460 #.values.flatten()/1460
