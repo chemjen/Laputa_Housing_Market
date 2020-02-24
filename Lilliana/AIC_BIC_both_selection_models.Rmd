@@ -1,0 +1,112 @@
+---
+title: "Correlations"
+output: html_notebook
+---
+
+
+
+```{r}
+library(ggplot2)
+df = read.csv("training_2_22_2020.csv")
+str(df)
+```
+
+
+```{r}
+library(corrplot)
+corrplot(df, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45, na.rm=True)
+
+```
+
+
+```{r}
+ggplot(df, aes(x=LotShape, y=SalePrice)) + geom_boxplot()
+```
+
+
+```{r}
+ggplot(df, aes(x=Neighborhood, y=SalePrice)) + geom_boxplot()
+```
+
+
+```{r}
+
+ggplot(df, aes(x=as.factor(MSSubClass), y=SalePrice)) + geom_boxplot()
+```
+
+
+```{r}
+ggplot(df, aes(x=HouseStyle, y=SalePrice)) + geom_boxplot()
+```
+```{r}
+ggplot(df, aes(x=as.factor(YearBuilt), y=SalePrice)) + geom_point()
+```
+
+
+```{r}
+df$YearRemodAdd = df$YearRemodAdd - df$YearBuilt
+ggplot(df, aes(x=as.factor(YearRemodAdd), y=SalePrice)) + geom_point()
+```
+```{r}
+ggplot(df, aes(x=Exterior1st, y=SalePrice)) + geom_boxplot()
+```
+
+```{r}
+
+ggplot(df, aes(x=ExterQual, y=SalePrice)) + geom_boxplot()
+```
+
+```{r}
+ggplot(df, aes(x=as.factor(OverallQual), y=SalePrice)) + geom_boxplot()
+
+```
+```{r}
+
+ggplot(df, aes(x=as.factor(Foundation), y=SalePrice)) + geom_boxplot()
+```
+
+
+```{r}
+
+df = df %>% select(., -Id, -MSSubClass, -LotShape, -Neighborhood, -YearRemodAdd, -Exterior1st, -Exterior2nd, -GarageType, -GarageYrBlt, -Foundation, -GarageFinish, -GarageCars)
+
+```
+
+
+```{r}
+ggplot(df, aes(x=MasVnrArea, y=SalePrice)) + geom_point()
+```
+```{r}
+library(mice)
+df$MasVnrArea = impute(df$MasVnrArea,0)
+```
+
+
+```{r}
+model_0 = lm(SalePrice ~ ., data = df)
+summary(model_0)
+
+```
+
+```{r}
+vif(model_0)
+```
+```{r}
+library(corrplot)
+corrplot(df, type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+```
+```{r}
+empty.model = lm(SalePrice ~ 1, data = df)
+scope = list(lower = formula(empty.model) , upper = formula(model_0))
+library(MASS)
+n = nrow(df)
+forwardBIC = step(empty.model, scope, direction = "both", k = log(n))
+
+```
+```{r}
+summary(forwardBIC)
+anova(forwardAIC, forwardBIC)
+```
+
