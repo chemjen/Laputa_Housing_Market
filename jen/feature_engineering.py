@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-train = pd.read_csv("./house-prices-advanced-regression-techniques/train.csv")
+train = pd.read_csv("../house-prices-advanced-regression-techniques/train.csv")
 train.columns
 train.set_index("Id", inplace=True)
 
@@ -26,7 +26,7 @@ train.drop(['MSSubClass', 'LotShape', 'Neighborhood', 'YearRemodAdd',
     'Exterior1st', 'Exterior2nd', 'GarageType', 'GarageYrBlt', 'Foundation',
 	'GarageFinish', 'GarageCars'], axis=1, inplace=True)
 
-
+train.to_csv('../train_clean.csv', index=False)
 ## 
 print(train.columns)
 #for column in train.columns:
