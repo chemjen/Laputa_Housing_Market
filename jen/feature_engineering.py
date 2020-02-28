@@ -31,7 +31,7 @@ train['MasVnrArea'] = train['MasVnrArea'].fillna(0)
 
 ## performed a log transform of SalePrice
 ## https://www.kaggle.com/jesucristo/1-house-prices-solution-top-1
-train['SalePrice'] = np.log1p(train['SalePrice'])
+train['LogSalePrice'] = np.log1p(train['SalePrice'])
 train.to_csv('../train_clean.csv', index=False)
 ## 
 print(train.columns)
