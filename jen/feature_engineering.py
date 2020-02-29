@@ -1,40 +1,48 @@
 import pandas as pd
 import numpy as np
 
-train = pd.read_csv("../house-prices-advanced-regression-techniques/train.csv")
-train.columns
-train.set_index("Id", inplace=True)
+datadir = "../house-prices-advanced-regression-techniques/"
+train = pd.read_csv(datadir+"train.csv")
+test = pd.read_csv(datadir+"test.csv")
+
+for df in [train, test]:
+
+	df.set_index("Id", inplace=True)
+	df['KitchenQual'] = df['KitchenQual'].fillna('TA')
+	df['MasVnrArea'] = df['MasVnrArea'].fillna(0)
+	df['BsmtFullBath'] = df['BsmtFullBath'].fillna(0)
+	df['BsmtHalfBath'] = df['BsmtHalfBath'].fillna(0)
+	df['GarageArea'] = df['GarageArea'].fillna(0)
+	df['TotalBsmtSF'] = df['TotalBsmtSF'].fillna(0)
+
+	df['FullBath']  = df['FullBath'] + df['BsmtFullBath']
+	df['HalfBath'] = df['HalfBath'] + df['BsmtHalfBath']
+
+	df.drop(['FireplaceQu', 'Street', 'Utilities', 'LandContour', 
+		'MasVnrType', 'Condition2', 'PoolArea', 'LotFrontage', 'CentralAir',
+		'Functional', 'LandSlope', 'LotConfig', 'Fence', 'BldgType', 'Street',
+		'Electrical', 'Alley', 'RoofStyle', 'KitchenAbvGr', 'BsmtFinType2',
+		'Heating', 'PavedDrive', 'LandContour', 'Condition1', 'GarageCond', 
+		'ExterCond', 'MSZoning', 'MiscFeature', 'SaleCondition', 'BsmtFinSF2',
+		'SaleType', 'BsmtCond', 'MiscVal', 'GarageQual','EnclosedPorch',
+		'3SsnPorch', 'RoofMatl', 'ScreenPorch', 'LowQualFinSF', 'Condition2',
+		'PoolQC', 'PoolArea', 'BsmtHalfBath', 'BsmtFullBath', 'BsmtQual',
+		'BsmtExposure','BsmtFinType1', 'BsmtFinSF1', 'BsmtUnfSF', '1stFlrSF', 
+		'2ndFlrSF', 'MSSubClass', 'LotShape', 'Neighborhood', 'YearRemodAdd',
+		'Exterior1st', 'Exterior2nd', 'GarageType', 'GarageYrBlt', 'Foundation',
+		'GarageFinish', 'GarageCars'], axis=1, inplace=True) 
 
 train = train.loc[train['GrLivArea'] < 4500] # outlier removal
-
-train['FullBath'] = train['FullBath'] + train['BsmtFullBath']
-train['HalfBath'] = train['HalfBath'] + train['BsmtHalfBath']
-
-train.drop(['FireplaceQu', 'Street', 'Utilities', 'LandContour', 'MasVnrType',
-	'Condition2', 'PoolArea', 'LotFrontage', 'CentralAir', 'Functional',
-	'LandSlope', 'LotConfig', 'Fence', 'BldgType', 'Street', 'Electrical',
-	'Alley', 'RoofStyle', 'KitchenAbvGr', 'BsmtFinType2', 'Heating',
-	'PavedDrive', 'LandContour', 'Condition1', 'GarageCond', 'ExterCond',
-	'MSZoning', 'MiscFeature', 'SaleCondition', 'BsmtFinSF2', 'SaleType',
-	'BsmtCond', 'MiscVal', 'GarageQual','EnclosedPorch','3SsnPorch',
-	'RoofMatl', 'ScreenPorch', 'LowQualFinSF', 'Condition2', 'PoolQC', 
-	'PoolArea', 'BsmtHalfBath', 'BsmtFullBath', 'BsmtQual', 'BsmtExposure',
-	'BsmtFinType1', 'BsmtFinSF1', 'BsmtUnfSF', '1stFlrSF', '2ndFlrSF'], 
-	axis=1, inplace=True)
-
-train.drop(['MSSubClass', 'LotShape', 'Neighborhood', 'YearRemodAdd',
-    'Exterior1st', 'Exterior2nd', 'GarageType', 'GarageYrBlt', 'Foundation',
-	'GarageFinish', 'GarageCars'], axis=1, inplace=True)
-
-train['MasVnrArea'] = train['MasVnrArea'].fillna(0)
-
 
 ## performed a log transform of SalePrice
 ## https://www.kaggle.com/jesucristo/1-house-prices-solution-top-1
 train['LogSalePrice'] = np.log1p(train['SalePrice'])
 train.to_csv('../train_clean.csv', index=False)
+test.to_csv('../test_clean.csv', index=False)
+
+
 ## 
-print(train.columns)
+
 #for column in train.columns:
 #    percentages = train[column].value_counts()/1460 #.values.flatten()/1460
 #    if percentages.iloc[0] > 0.7:
