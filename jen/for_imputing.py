@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
 
-train = pd.read_csv("../house-prices-advanced-regression-techniques/test.csv")
+datadir = "../house-prices-advanced-regression-techniques/"
+train = pd.read_csv(datadir+"train.csv")
+test = pd.read_csv(datadir+"test.csv")
+
 train.columns
 train.set_index("Id", inplace=True)
 
