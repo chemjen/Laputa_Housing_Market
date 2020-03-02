@@ -21,25 +21,19 @@ for df in [train, test]:
 	df['FullBath']  = df['FullBath'] + df['BsmtFullBath']
 	df['HalfBath'] = df['HalfBath'] + df['BsmtHalfBath']
 	df['TotSF'] = df['GrLivArea']-df['LowQualFinSF'] + df['TotalBsmtSF']
-	df.drop(['FireplaceQu', 'Street', 'Utilities', 'LandContour', 
-		'MasVnrType', 'Condition2', 'PoolArea', 'LotFrontage', 'CentralAir',
-		'Functional', 'LandSlope', 'LotConfig', 'Fence', 'BldgType', 'Street',
-		'Electrical', 'Alley', 'RoofStyle', 'KitchenAbvGr', 'BsmtFinType2',
-		'Heating', 'PavedDrive', 'LandContour', 'Condition1', 'GarageCond', 
-		'ExterCond', 'MSZoning', 'MiscFeature', 'SaleCondition', 'BsmtFinSF2',
-		'SaleType', 'BsmtCond', 'MiscVal', 'GarageQual','EnclosedPorch',
-		'3SsnPorch', 'RoofMatl', 'ScreenPorch', 'LowQualFinSF', 'Condition2',
-		'PoolQC', 'PoolArea', 'BsmtHalfBath', 'BsmtFullBath', 'BsmtQual',
-		'BsmtExposure','BsmtFinType1', 'BsmtFinSF1', 'BsmtUnfSF', '1stFlrSF', 
-		'2ndFlrSF', 'MSSubClass', 'LotShape', 'Neighborhood', 'YearRemodAdd',
-		'Exterior1st', 'Exterior2nd', 'GarageType', 'GarageYrBlt', 
-		'Foundation', 'GarageFinish', 'GarageCars'], axis=1, inplace=True) 
+	df.drop(['FireplaceQu', 'Utilities', 'MasVnrType', 'LotFrontage', 
+		'Functional', 'Fence', 'Electrical', 'Alley', 'BsmtFinType2', 'GarageCond',
+		'MSZoning', 'MiscFeature', 'BsmtFinSF2', 'SaleType', 'BsmtCond', 
+		'GarageQual', 'PoolQC', 'BsmtHalfBath', 'BsmtFullBath', 'BsmtQual',
+		'BsmtExposure','BsmtFinType1', 'BsmtFinSF1', 'BsmtUnfSF','Exterior1st', 
+		'Exterior2nd', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageCars'], 
+		axis=1, inplace=True) 
 
 ## performed a log transform of SalePrice
 ## https://www.kaggle.com/jesucristo/1-house-prices-solution-top-1
 train['LogSalePrice'] = np.log1p(train['SalePrice'])
-train.to_csv('../train_clean.csv', index=False)
-test.to_csv('../test_clean.csv', index=False)
+train.to_csv('../train_clean_v2.csv', index=False)
+test.to_csv('../test_clean_v2.csv', index=False)
 
 #for column in train.columns:
 #    percentages = train[column].value_counts()/1460 #.values.flatten()/1460
