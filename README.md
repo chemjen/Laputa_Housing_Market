@@ -38,3 +38,8 @@ feature_engineering_v2.py
 
 example: >> python tree_model.py gradboost v2
 
+To plot feature importance results of the tree_model, and make predictions, 
+use plot_and_predict.py. This is used similarly as tree_model.py:
+
+>> python plot_and_predict.py <model> <version>
+
