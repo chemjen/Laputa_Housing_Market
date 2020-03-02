@@ -13,11 +13,15 @@ if version == 'v1':
 else:
 	test = pd.read_csv('../test_clean_'+version+'.csv')
 
-best_est = load('./estimators/gradboost_'+version+'.joblib')
+best_est = load('./estimators/'+model+'_'+version+'.joblib')
 newdf = pd.DataFrame(best_est.feature_importances_, index=test.columns, 
 	columns=['importance'])
 newdf.sort_values(by='importance', ascending=False).plot.bar()
-plt.title('Gradient Boost')
+if model == 'gradboost': title = 'Gradient Boost'
+elif model == 'xgboost': title = 'XG Boost'
+elif model == 'randomforest': title = 'Random Forest'
+
+plt.title(title)
 plt.tight_layout()
 plt.show()
 
