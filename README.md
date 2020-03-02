@@ -10,6 +10,13 @@ Liliana Nishihira: lnishihira
 Dan Laufer: DanLauferPhysics
 Jen Ruddock: chemjen
 
+-------------------------------------
+./dlaufer/
+
+Dan had trouble with his git/github branch merging, but Untitled.py
+is his jupyter notebook, including EDA, feature engineering, and a
+high-performing regression.
+
 --------------------------------------
 ./Hanbo/
 Two files are included in Hanbo's subfolder.
@@ -37,7 +44,7 @@ then the "v2" adds in more features to see what happens.
 
 tree_model.py is the function to run the regression. To run:
 
-```python tree_model.py <model> <version>```
+```>> python tree_model.py <model> <version>```
 
 where <model> can be any of: randomforest, gradboost, or xgboost
 This is the regrssion model, telling the script to run the corresponding 
@@ -48,12 +55,12 @@ This is the version of the train/test sets to use: v1 corresponds to the
 output of feature_engineering.py and v2 corresponds to 
 feature_engineering_v2.py
 
-example: ```python tree_model.py gradboost v2```
+example: ```>> python tree_model.py gradboost v2```
 
 To plot feature importance results of the tree_model, and make predictions, 
 use plot_and_predict.py. This is used similarly as tree_model.py:
 
-```python plot_and_predict.py <model> <version>```
+```>> python plot_and_predict.py <model> <version>```
 
 --------------------------------
 ./Lilliana/
