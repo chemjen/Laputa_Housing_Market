@@ -25,7 +25,7 @@ then the "v2" adds in more features to see what happens.
 
 tree_model.py is the function to run the regression. To run:
 
->> python tree_model.py <model> <version>
+```python tree_model.py <model> <version>```
 
 where <model> can be any of: randomforest, gradboost, or xgboost
 This is the regrssion model, telling the script to run the corresponding 
@@ -36,12 +36,12 @@ This is the version of the train/test sets to use: v1 corresponds to the
 output of feature_engineering.py and v2 corresponds to 
 feature_engineering_v2.py
 
-example: >> python tree_model.py gradboost v2
+example: ```python tree_model.py gradboost v2```
 
 To plot feature importance results of the tree_model, and make predictions, 
 use plot_and_predict.py. This is used similarly as tree_model.py:
 
->> python plot_and_predict.py <model> <version>
+```python plot_and_predict.py <model> <version>```
 
 --------------------------------------
 ./Hanbo/
@@ -54,3 +54,15 @@ This jupyter notebook contains a thorough exploratody data analysis that include
 > Model_Predict.ipynb
 
 This jupyter notebook contains some linear models that is based on the dataframe cleaned in the previous EDA notebook.
+
+--------------------------------
+This directory contains Lilliana's EDA and the group's Base Model (interpretabel model)
+
+AIC_BIC_both_selection_models.Rmd
+Exploration of categorical features after filtering for columns with large class imbalance
+
+Lasso+Ridge.ipynb
+Use Lasso to reduce columns, gridsearchfor hyperparameters for elasticnet
+
+Testing_elastic_net.ipynb
+Clean testing data then run predictions, submitted to Kaggle
