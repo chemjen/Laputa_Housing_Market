@@ -43,3 +43,14 @@ use plot_and_predict.py. This is used similarly as tree_model.py:
 
 >> python plot_and_predict.py <model> <version>
 
+--------------------------------------
+./Hanbo/
+Two files are included in Hanbo's subfolder.
+
+> EDA.ipynb
+
+This jupyter notebook contains a thorough exploratody data analysis that includes missingess, inbalance, correaltion, kurtosis, skewness and so forth. Besides EDA, this jupyternotebook contains a complete data imputation for all columns with missing values and impute accordingly.
+
+> Model_Predict.ipynb
+
+This jupyter notebook contains some linear models that is based on the dataframe cleaned in the previous EDA notebook.
