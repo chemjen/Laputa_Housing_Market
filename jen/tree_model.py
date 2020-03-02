@@ -53,9 +53,10 @@ grid_search_reg  = GridSearchCV(reg, grid_params, scoring='r2', cv=5,
 grid_search_reg.fit(features, target)
 print(grid_search_reg.best_params_)
 
-print(grid_search_reg.best_score_)
+print(1 - grid_search_reg.best_score_)
 best_est = grid_search_reg.best_estimator_
-
-print(best_est.score(features, target))
+#print(best_est.score(features, target))
+best_est = best_est.fit(features, target)
+print(1 - best_est.score(features, target))
 dump(best_est, './estimators/'+model+'_'+version+'.joblib')
 
