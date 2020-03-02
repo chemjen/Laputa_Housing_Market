@@ -46,11 +46,11 @@ tree_model.py is the function to run the regression. To run:
 
 ```>> python tree_model.py <model> <version>```
 
-where <model> can be any of: randomforest, gradboost, or xgboost
+where ```<model>``` can be any of: randomforest, gradboost, or xgboost
 This is the regrssion model, telling the script to run the corresponding 
 sklearn regressor with a GridSearchCV
 
-and <version> is either 'v1' or 'v2'
+and ```<version>``` is either 'v1' or 'v2'
 This is the version of the train/test sets to use: v1 corresponds to the 
 output of feature_engineering.py and v2 corresponds to 
 feature_engineering_v2.py
